@@ -9,57 +9,50 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class AntiBuildCommandExecutor implements CommandExecutor{
+public class AntiBuildCommandExecutor implements CommandExecutor {
 
 	AntiBuild plugin;
-	
+
 	public AntiBuildCommandExecutor(AntiBuild pl) {
 		plugin = pl;
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if(cmd.getName().equalsIgnoreCase("antibuild")){
-			if(args.length == 1){
-				if(args[0].equalsIgnoreCase("reload")){
+	public boolean onCommand(CommandSender sender, Command cmd, String label,
+			String[] args) {
+		if (cmd.getName().equalsIgnoreCase("antibuild")) {
+			if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("reload")) {
 					commandReload(sender);
 					return true;
-				}
-				else if(args[0].equalsIgnoreCase("list")){
+				} else if (args[0].equalsIgnoreCase("list")) {
 					commandLockList(sender);
 					return true;
-				}
-				else{
+				} else {
 					sender.sendMessage(usageMessage());
 					return true;
 				}
-			}
-			else if(args.length == 2){
-				if(args[0].equalsIgnoreCase("lock")){
+			} else if (args.length == 2) {
+				if (args[0].equalsIgnoreCase("lock")) {
 					commandLock(sender, args);
 					return true;
-				}
-				else if(args[0].equalsIgnoreCase("unlock")){
+				} else if (args[0].equalsIgnoreCase("unlock")) {
 					commandUnlock(sender, args);
 					return true;
-				}
-				else{
+				} else {
 					sender.sendMessage(usageMessage());
 					return true;
 				}
-			}
-			else{
-				if(sender instanceof Player){
-					if(sender.hasPermission("antibuild.reload")){
+			} else {
+				if (sender instanceof Player) {
+					if (sender.hasPermission("antibuild.reload")) {
 						sender.sendMessage(usageMessage());
 						return true;
-					}
-					else{
+					} else {
 						sender.sendMessage(noPermsMessage());
 						return true;
 					}
-				}
-				else{
+				} else {
 					sender.sendMessage(usageMessage());
 					return true;
 				}
@@ -69,82 +62,79 @@ public class AntiBuildCommandExecutor implements CommandExecutor{
 	}
 
 	private void commandReload(CommandSender sender) {
-		if(sender instanceof Player){
-			if(sender.hasPermission("antibuild.reload")){
+		if (sender instanceof Player) {
+			if (sender.hasPermission("antibuild.reload")) {
 				plugin.reloadConfig();
 				sender.sendMessage(ChatColor.RED + "AntiBuild config reloaded!");
-			}
-			else{
+			} else {
 				sender.sendMessage(noPermsMessage());
 			}
-		}
-		else{
+		} else {
 			plugin.reloadConfig();
 			sender.sendMessage(ChatColor.RED + "AntiBuild config reloaded!");
 		}
 	}
 
 	private void commandLockList(CommandSender sender) {
-		if(sender instanceof Player){
-			if(sender.hasPermission("antibuild.lock")){
+		if (sender instanceof Player) {
+			if (sender.hasPermission("antibuild.lock")) {
 				lockedWorldsMessage(sender);
-			}
-			else{
+			} else {
 				sender.sendMessage(noPermsMessage());
 			}
-		}
-		else{
+		} else {
 			lockedWorldsMessage(sender);
 		}
 	}
-	
+
 	private void commandLock(CommandSender sender, String[] args) {
-		if(sender.hasPermission("antibuild.lock")){
+		if (sender.hasPermission("antibuild.lock")) {
 			String worldName = getValidWorld(args[1]);
-			if(!worldName.isEmpty() && plugin.isLockedWorld(worldName)){
-				sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.RED + " has already been locked by AntiBuild!");
-			}
-			else if(!worldName.isEmpty()){
+			if (!worldName.isEmpty() && plugin.isLockedWorld(worldName)) {
+				sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.RED
+						+ " has already been locked by AntiBuild!");
+			} else if (!worldName.isEmpty()) {
 				plugin.addLockedWorld(worldName);
-				sender.sendMessage(ChatColor.YELLOW + worldName + ChatColor.RED + " has been locked by AntiBuild!");
+				sender.sendMessage(ChatColor.YELLOW + worldName + ChatColor.RED
+						+ " has been locked by AntiBuild!");
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.RED
+						+ " is not a valid world!");
 			}
-			else{
-				sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.RED + " is not a valid world!");
-			}
-		}
-		else{
+		} else {
 			sender.sendMessage(noPermsMessage());
 		}
 	}
 
 	private void commandUnlock(CommandSender sender, String[] args) {
-		if(sender.hasPermission("antibuild.lock")){
+		if (sender.hasPermission("antibuild.lock")) {
 			String worldName = getValidWorld(args[1]);
-			if(!worldName.isEmpty()){
-				if(!plugin.isLockedWorld(worldName)){
-					sender.sendMessage(ChatColor.YELLOW + worldName + ChatColor.RED + " is not currently locked!");
-				}
-				else{
+			if (!worldName.isEmpty()) {
+				if (!plugin.isLockedWorld(worldName)) {
+					sender.sendMessage(ChatColor.YELLOW + worldName
+							+ ChatColor.RED + " is not currently locked!");
+				} else {
 					plugin.removeLockedWorld(worldName);
-					sender.sendMessage(ChatColor.YELLOW + worldName + ChatColor.RED + " has been unlocked by AntiBuild!");
+					sender.sendMessage(ChatColor.YELLOW + worldName
+							+ ChatColor.RED
+							+ " has been unlocked by AntiBuild!");
 				}
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + args[1]
+						+ " is not a valid world!");
 			}
-			else{
-				sender.sendMessage(ChatColor.YELLOW + args[1] + " is not a valid world!");
-			}
-		}
-		else{
+		} else {
 			sender.sendMessage(noPermsMessage());
-		}		
+		}
 	}
-	
-	private String getValidWorld(String worldName){
+
+	private String getValidWorld(String worldName) {
 		List<World> worlds = plugin.getServer().getWorlds();
 		String validName = worldName;
-		
-		for(int i = 0; i < worlds.size(); i++){
+
+		for (int i = 0; i < worlds.size(); i++) {
 			validName = worlds.get(i).getName();
-			if(validName.equalsIgnoreCase(worldName)){
+			if (validName.equalsIgnoreCase(worldName)) {
 				return validName;
 			}
 		}
@@ -152,30 +142,30 @@ public class AntiBuildCommandExecutor implements CommandExecutor{
 	}
 
 	private String usageMessage() {
-		return (ChatColor.RED + "AntiBuild Command Usage: \n" + ChatColor.YELLOW 
-	                          + "/antibuild reload \n/antibuild lock [world] \n" 
-				              + "/antibuild unlock [world]\n"
-				              + "/antibuild list");
-	}
-	
-	private String noPermsMessage() {
-		return (ChatColor.RED + "You don't have permission to do this!");
-		
-	}
-	
-	private void lockedWorldsMessage(CommandSender sender) {
-		List<String> worlds = plugin.getLockedWorlds();
-		if(worlds != null){
-			sender.sendMessage(ChatColor.RED + "Current worlds locked by Antibuild:");
-			for(int i = 0; i < worlds.size(); i++){
-				sender.sendMessage(ChatColor.YELLOW + worlds.get(i));
-			}
-		}
-		else{
-			sender.sendMessage(ChatColor.RED + "There are currently no worlds locked.");
-		}
-		
+		return (ChatColor.RED + "AntiBuild Command Usage: \n"
+				+ ChatColor.YELLOW
+				+ "/antibuild reload \n/antibuild lock [world] \n"
+				+ "/antibuild unlock [world]\n" + "/antibuild list");
 	}
 
-	
+	private String noPermsMessage() {
+		return (ChatColor.RED + "You don't have permission to do this!");
+
+	}
+
+	private void lockedWorldsMessage(CommandSender sender) {
+		List<String> worlds = plugin.getLockedWorlds();
+		if (worlds != null) {
+			sender.sendMessage(ChatColor.RED
+					+ "Current worlds locked by Antibuild:");
+			for (int i = 0; i < worlds.size(); i++) {
+				sender.sendMessage(ChatColor.YELLOW + worlds.get(i));
+			}
+		} else {
+			sender.sendMessage(ChatColor.RED
+					+ "There are currently no worlds locked.");
+		}
+
+	}
+
 }

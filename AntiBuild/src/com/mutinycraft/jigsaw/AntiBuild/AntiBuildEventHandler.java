@@ -1,5 +1,6 @@
 package com.mutinycraft.jigsaw.AntiBuild;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class AntiBuildEventHandler implements Listener {
 
@@ -230,7 +232,43 @@ public class AntiBuildEventHandler implements Listener {
 		}
 	}
 
-	// Improved Inventory Access
+	// Chest Access
+
+	@EventHandler(priority = EventPriority.LOW)
+	public void NoChestAccess(PlayerInteractEvent event) {
+		Material blockType;
+
+		try {
+			blockType = event.getClickedBlock().getType();
+		} catch (NullPointerException e) {
+			blockType = null;
+		}
+
+		if (blockType == Material.CHEST) {
+			if (event.getPlayer() instanceof Player) {
+
+				Player player = (Player) event.getPlayer();
+
+				if (!player.hasPermission("antibuild.bypass")) {
+					if (!player.hasPermission("antibuild.chest")) {
+						event.setCancelled(true);
+						message(player);
+					}
+				}
+
+				// World lock check
+				if (event.isCancelled() && plugin.isUsingLock()) {
+					if (plugin.isLockedWorld(player.getWorld().getName())
+							&& !player.hasPermission("antibuild.lock.bypass")) {
+						event.setCancelled(true);
+						messageWorld(player);
+					}
+				}
+			}
+		}
+	}
+
+	// Inventory Access
 
 	@EventHandler(priority = EventPriority.LOW)
 	public void NoInventoryAccess(InventoryOpenEvent event) {
