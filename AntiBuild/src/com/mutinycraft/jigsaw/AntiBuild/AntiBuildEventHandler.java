@@ -272,9 +272,6 @@ public class AntiBuildEventHandler implements Listener {
 					message(player);
 				}
 				break;
-			case CREATIVE:
-				// Don't do anything
-				break;
 			case DISPENSER:
 				if (!player.hasPermission("antibuild.dispenser")) {
 					event.setCancelled(true);
@@ -299,12 +296,6 @@ public class AntiBuildEventHandler implements Listener {
 					message(player);
 				}
 				break;
-			case MERCHANT:
-				// Don't do anything
-				break;
-			case PLAYER:
-				// Don't do anything
-				break;
 			case WORKBENCH:
 				if (!player.hasPermission("antibuild.workbench")) {
 					event.setCancelled(true);
@@ -312,10 +303,7 @@ public class AntiBuildEventHandler implements Listener {
 				}
 				break;
 			default:
-				// This should never happen, but if it does, don't do anything
-				// special.
 				break;
-
 			}
 		}
 
