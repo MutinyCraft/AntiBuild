@@ -132,8 +132,8 @@ public class AntiBuildCommandExecutor implements CommandExecutor {
 		List<World> worlds = plugin.getServer().getWorlds();
 		String validName = worldName;
 
-		for (int i = 0; i < worlds.size(); i++) {
-			validName = worlds.get(i).getName();
+		for (World world : worlds) {
+			validName = world.getName();
 			if (validName.equalsIgnoreCase(worldName)) {
 				return validName;
 			}
@@ -158,8 +158,8 @@ public class AntiBuildCommandExecutor implements CommandExecutor {
 		if (worlds != null) {
 			sender.sendMessage(ChatColor.RED
 					+ "Current worlds locked by Antibuild:");
-			for (int i = 0; i < worlds.size(); i++) {
-				sender.sendMessage(ChatColor.YELLOW + worlds.get(i));
+			for (String world : worlds) {
+				sender.sendMessage(ChatColor.YELLOW + world);
 			}
 		} else {
 			sender.sendMessage(ChatColor.RED
