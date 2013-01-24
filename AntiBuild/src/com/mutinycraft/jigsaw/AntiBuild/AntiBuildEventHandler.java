@@ -1,5 +1,6 @@
 package com.mutinycraft.jigsaw.AntiBuild;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -7,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
@@ -215,15 +217,8 @@ public class AntiBuildEventHandler implements Listener {
 
 	@EventHandler(priority = EventPriority.LOW)
 	public void NoChestAccess(PlayerInteractEvent event) {
-		Material blockType;
-
-		try {
-			blockType = event.getClickedBlock().getType();
-		} catch (NullPointerException e) {
-			blockType = null;
-		}
-
-		if (blockType == Material.CHEST) {
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+				&& event.getClickedBlock().getType() == Material.CHEST) {
 			if (event.getPlayer() instanceof Player) {
 
 				Player player = (Player) event.getPlayer();
