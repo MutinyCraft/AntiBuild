@@ -1,0 +1,17 @@
+# AntiBuild version 2.0
+
+# Define your custom message to be displayed when a player tries to build that is not allowed.
+# Standard CraftBukkit color codes are supported. Use "&" plus the color identifier. Red would be "&c". 
+# You must start and end the message with the ' symbol or you will break your config.
+
+Message: '&cYou are not allowed to build!'
+Message-Blacklist: '&cYou may not place or break this type of block!'
+Message-Locked-World: '&cYou are not allowed to build in this world!'
+
+# Blacklisted items are not allowed to be placed unless the player is given permission antibuild.blacklist
+# Make sure to follow the format and don't use tabs or you will get an error.
+# Currently only supports item IDs.  This is done for the gain of a faster check against the blacklist.
+
+Blacklist-On: false
+Blacklisted-Blocks:
+  - 7

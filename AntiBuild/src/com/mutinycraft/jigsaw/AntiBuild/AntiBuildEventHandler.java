@@ -1,6 +1,5 @@
 package com.mutinycraft.jigsaw.AntiBuild;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
