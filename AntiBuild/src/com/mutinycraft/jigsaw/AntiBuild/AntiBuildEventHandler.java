@@ -36,15 +36,25 @@ public class AntiBuildEventHandler implements Listener {
 			// Main check
 			if (!player.hasPermission("antibuild.place")) {
 				event.setCancelled(true);
-				message(player);
 			}
 
 			// Flint and steel check
 			if (!event.isCancelled() && event.getBlock().getTypeId() == 51) {
 				if (!player.hasPermission("antibuild.fire")) {
 					event.setCancelled(true);
-					message(player);
 				}
+			}
+
+			// Block Type Check
+			if (plugin.isPerBlockPermission()) {
+				if (player.hasPermission("antibuild.place."
+						+ event.getBlock().getTypeId())) {
+					event.setCancelled(false);
+				}
+			}
+
+			if (event.isCancelled()) {
+				message(player);
 			}
 		}
 
@@ -82,6 +92,17 @@ public class AntiBuildEventHandler implements Listener {
 			// Break check
 			if (!player.hasPermission("antibuild.break")) {
 				event.setCancelled(true);
+			}
+
+			// Block Type Check
+			if (plugin.isPerBlockPermission()) {
+				if (player.hasPermission("antibuild.break."
+						+ event.getBlock().getTypeId())) {
+					event.setCancelled(false);
+				}
+			}
+
+			if (event.isCancelled()) {
 				message(player);
 			}
 		}
@@ -250,7 +271,6 @@ public class AntiBuildEventHandler implements Listener {
 		if (event.getPlayer() instanceof Player) {
 			player = (Player) event.getPlayer();
 		}
-
 		if (player != null && !player.hasPermission("antibuild.bypass")) {
 			switch (event.getInventory().getType()) {
 			case ANVIL:
@@ -297,6 +317,12 @@ public class AntiBuildEventHandler implements Listener {
 				break;
 			case ENDER_CHEST:
 				if (!player.hasPermission("antibuild.enderchest")) {
+					event.setCancelled(true);
+					message(player);
+				}
+				break;
+			case HOPPER:
+				if (!player.hasPermission("antibuild.hopper")) {
 					event.setCancelled(true);
 					message(player);
 				}

@@ -28,10 +28,11 @@ public class AntiBuild extends JavaPlugin implements Listener {
 	private String lockedWorldMessage;
 	private boolean blacklistOn;
 	private boolean usingLock;
+	private boolean perBlockPermission;
 	private List<String> lockedWorlds;
 	private List<Integer> blacklist;
 	private AntiBuildCommandExecutor cmdExecutor;
-	private static final String VERSION = " v2.2";
+	private static final String VERSION = " v2.3";
 
 	// Enable
 	public void onEnable() {
@@ -79,6 +80,7 @@ public class AntiBuild extends JavaPlugin implements Listener {
 						"You are not allowed to build in this world!"));
 		blacklistOn = config.getBoolean("Blacklist-On", false);
 		blacklist = config.getIntegerList("Blacklisted-Blocks");
+		perBlockPermission = config.getBoolean("Per-Block-Permission", false);
 	}
 
 	private void setLockedWorlds() {
@@ -147,6 +149,10 @@ public class AntiBuild extends JavaPlugin implements Listener {
 
 	public List<Integer> getBlacklist() {
 		return blacklist;
+	}
+
+	public boolean isPerBlockPermission() {
+		return perBlockPermission;
 	}
 
 	// World lock handling
