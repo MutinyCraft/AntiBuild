@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,16 +24,14 @@ public class AntiBuild extends JavaPlugin implements Listener {
 	FileConfiguration config;
 	FileConfiguration wConfig;
 
-	private String message;
-	private String blacklistMessage;
-	private String lockedWorldMessage;
 	private boolean blacklistOn;
 	private boolean usingLock;
 	private boolean perBlockPermission;
+	private List<String> messages;
 	private List<String> lockedWorlds;
 	private List<Integer> blacklist;
 	private AntiBuildCommandExecutor cmdExecutor;
-	private static final String VERSION = " v2.3";
+	private static final String VERSION = " v2.4";
 
 	// Enable
 	public void onEnable() {
@@ -48,6 +47,8 @@ public class AntiBuild extends JavaPlugin implements Listener {
 
 		config = new YamlConfiguration();
 		wConfig = new YamlConfiguration();
+
+		messages = new ArrayList<String>(10);
 
 		loadYamls();
 
@@ -70,14 +71,33 @@ public class AntiBuild extends JavaPlugin implements Listener {
 
 	// Config Handling
 	private void setConfigOptions() {
-		message = ChatColor.translateAlternateColorCodes('&',
-				config.getString("Message", "You are not allowed to build!"));
-		blacklistMessage = ChatColor.translateAlternateColorCodes('&', config
+		messages.add(0,
+				ChatColor.translateAlternateColorCodes('&', (config.getString(
+						"Message-Build", "&cYou are not allowed to build!"))));
+		messages.add(1, ChatColor.translateAlternateColorCodes('&', (config
+				.getString("Message-Break",
+						"&cYou are not allowed to break blocks!"))));
+		messages.add(2, ChatColor.translateAlternateColorCodes('&', (config
+				.getString("Message-Bucket",
+						"&cYou are not allowed to use buckets!"))));
+		messages.add(3, ChatColor.translateAlternateColorCodes('&', (config
+				.getString("Message-Chest",
+						"&cYou are not allowed to access chests!"))));
+		messages.add(4, ChatColor.translateAlternateColorCodes('&', (config
+				.getString("Message-Interact",
+						"&cYou are not allowed to interact with this!"))));
+		messages.add(5, ChatColor.translateAlternateColorCodes('&', (config
+				.getString("Message-Drop-Items",
+						"&cYou are not allowed to drop items!"))));
+		messages.add(6, ChatColor.translateAlternateColorCodes('&', (config
 				.getString("Message-Blacklist",
-						"You may not place or break this type of block!"));
-		lockedWorldMessage = ChatColor.translateAlternateColorCodes('&', config
-				.getString("Message-Locked-World",
-						"You are not allowed to build in this world!"));
+						"&cYou may not place or break this type of block!"))));
+		messages.add(
+				7,
+				ChatColor.translateAlternateColorCodes(
+						'&',
+						(config.getString("Message-Locked-World",
+								"&cThis world is currently locked and cannot be built in."))));
 		blacklistOn = config.getBoolean("Blacklist-On", false);
 		blacklist = config.getIntegerList("Blacklisted-Blocks");
 		perBlockPermission = config.getBoolean("Per-Block-Permission", false);
@@ -133,12 +153,37 @@ public class AntiBuild extends JavaPlugin implements Listener {
 	}
 
 	// Message Handling
-	public String getMessage() {
-		return message;
+
+	public String getBuildMessage() {
+		return messages.get(0);
 	}
 
-	public String getBlacklistMessage() {
-		return blacklistMessage;
+	public String getBreakMessage() {
+		return messages.get(1);
+	}
+
+	public String getBucketMessage() {
+		return messages.get(2);
+	}
+
+	public String getChestMessage() {
+		return messages.get(3);
+	}
+
+	public String getInteractMessage() {
+		return messages.get(4);
+	}
+
+	public String getDropItemsMessage() {
+		return messages.get(5);
+	}
+
+	public String getBlackListMessage() {
+		return messages.get(6);
+	}
+
+	public String getLockedWorldMessage() {
+		return messages.get(7);
 	}
 
 	// Black List
@@ -243,9 +288,5 @@ public class AntiBuild extends JavaPlugin implements Listener {
 	// Disable
 	public void onDispable() {
 		log.info(this.getName() + VERSION + " disabled!");
-	}
-
-	public String getLockedWorldMessage() {
-		return lockedWorldMessage;
 	}
 }

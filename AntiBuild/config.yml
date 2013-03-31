@@ -1,16 +1,23 @@
-# AntiBuild version 2.3
+# AntiBuild version 2.4
 
 # Define your custom message to be displayed when a player tries to build that is not allowed.
 # Standard CraftBukkit color codes are supported. Use "&" plus the color identifier. Red would be "&c". 
 # You must start and end the message with the ' symbol or you will break your config.
 
-Message: '&cYou are not allowed to build!'
+Message-Build: '&cYou are not allowed to build!'
+Message-Break: '&cYou are not allowed to break blocks!'
+Message-Bucket: '&cYou are not allowed to use buckets!'
+Message-Chest: '&cYou are not allowed to access chests!'
+Message-Interact: '&cYou are not allowed to interact with this!'
+Message-Drop-Items: '&cYou are not allowed to drop items!'
 Message-Blacklist: '&cYou may not place or break this type of block!'
-Message-Locked-World: '&cYou are not allowed to build in this world!'
+Message-Locked-World: '&cThis world is currently locked and cannot be built in.'
 
-# Per block break/place permissions
+# Per block break/place permissions.  Set to true to enable.
 # Use this to allow a player to only place or break certain blocks.
 # You must ensure they do not have antibuild.bypass or they will still bypass this check.
+# Example: antibuild.break.1 would allow a player to only break stone and no other blocks.
+
 Per-Block-Permission: false
 
 # Blacklisted items are not allowed to be placed unless the player is given permission antibuild.blacklist
