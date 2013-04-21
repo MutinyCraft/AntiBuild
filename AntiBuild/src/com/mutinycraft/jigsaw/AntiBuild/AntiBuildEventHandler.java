@@ -443,6 +443,36 @@ public class AntiBuildEventHandler implements Listener {
 	}
 
 	/**
+	 * Special check to see if a Minecart is blacklisted since this is actually
+	 * considered an entity and not a block.
+	 * 
+	 * @param event
+	 */
+	@EventHandler(priority = EventPriority.LOW)
+	private void MinecartBlacklistCheck(PlayerInteractEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+
+		Player player = event.getPlayer();
+		Material block = event.getClickedBlock().getType();
+		int blockID = event.getPlayer().getItemInHand().getTypeId();
+
+		if (plugin.isBlacklistOn()
+				&& blockIsBlacklisted(blockID)
+				&& (!player.hasPermission("antibuild.blacklist") || !player
+						.hasPermission("antibuild.blacklist." + blockID))) {
+			if (block == Material.ACTIVATOR_RAIL
+					|| block == Material.POWERED_RAIL
+					|| block == Material.RAILS
+					|| block == Material.DETECTOR_RAIL) {
+				event.setCancelled(true);
+				player.sendMessage(plugin.getBlackListMessage());
+			}
+		}
+	}
+
+	/**
 	 * Checks the provided block to see if it is contained in the
 	 * Blacklisted-Blocks section of the config.yml.
 	 * 
