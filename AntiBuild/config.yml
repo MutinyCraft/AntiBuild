@@ -3,6 +3,7 @@
 # Define your custom message to be displayed when a player tries to interact and is denied permission.
 # Standard CraftBukkit color codes are supported. Use "&" plus the color identifier. Red would be "&c". 
 # You must start and end the message with the ' symbol or you will break your config.
+# If you do not want a message to be sent to the player you must put '' for the message.
 
 Message-Build: '&cYou are not allowed to build!'
 Message-Break: '&cYou are not allowed to break blocks!'

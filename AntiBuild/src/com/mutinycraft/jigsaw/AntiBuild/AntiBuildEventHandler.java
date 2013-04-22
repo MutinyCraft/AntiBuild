@@ -60,7 +60,7 @@ public class AntiBuildEventHandler implements Listener {
 			}
 
 			if (event.isCancelled()) {
-				player.sendMessage(plugin.getBuildMessage());
+				messageHandler(plugin.getBuildMessage(), player);
 			}
 		}
 
@@ -73,7 +73,7 @@ public class AntiBuildEventHandler implements Listener {
 						+ String.valueOf(id);
 				if (!player.hasPermission(perBlockPermission)) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getBlackListMessage());
+					messageHandler(plugin.getBlackListMessage(), player);
 				}
 			}
 		}
@@ -83,7 +83,7 @@ public class AntiBuildEventHandler implements Listener {
 			if (plugin.isLockedWorld(player.getWorld().getName())
 					&& !player.hasPermission("antibuild.lock.bypass")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getLockedWorldMessage());
+				messageHandler(plugin.getLockedWorldMessage(), player);
 			}
 		}
 
@@ -114,7 +114,7 @@ public class AntiBuildEventHandler implements Listener {
 			}
 
 			if (event.isCancelled()) {
-				player.sendMessage(plugin.getBreakMessage());
+				messageHandler(plugin.getBreakMessage(), player);
 			}
 		}
 
@@ -127,7 +127,7 @@ public class AntiBuildEventHandler implements Listener {
 						+ String.valueOf(id);
 				if (!player.hasPermission(perBlockPermission)) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getBlackListMessage());
+					messageHandler(plugin.getBlackListMessage(), player);
 				}
 			}
 		}
@@ -137,7 +137,7 @@ public class AntiBuildEventHandler implements Listener {
 			if (plugin.isLockedWorld(player.getWorld().getName())
 					&& !player.hasPermission("antibuild.lock.bypass")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getLockedWorldMessage());
+				messageHandler(plugin.getLockedWorldMessage(), player);
 			}
 		}
 	}
@@ -156,7 +156,7 @@ public class AntiBuildEventHandler implements Listener {
 		if (!player.hasPermission("antibuild.bypass")) {
 			if (!player.hasPermission("antibuild.bucket")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getBucketMessage());
+				messageHandler(plugin.getBucketMessage(), player);
 			}
 		}
 
@@ -165,7 +165,7 @@ public class AntiBuildEventHandler implements Listener {
 			if (plugin.isLockedWorld(player.getWorld().getName())
 					&& !player.hasPermission("antibuild.lock.bypass")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getLockedWorldMessage());
+				messageHandler(plugin.getLockedWorldMessage(), player);
 			}
 		}
 	}
@@ -184,7 +184,7 @@ public class AntiBuildEventHandler implements Listener {
 		if (!player.hasPermission("antibuild.bypass")) {
 			if (!player.hasPermission("antibuild.bucket")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getBucketMessage());
+				messageHandler(plugin.getBucketMessage(), player);
 			}
 		}
 
@@ -193,7 +193,7 @@ public class AntiBuildEventHandler implements Listener {
 			if (plugin.isLockedWorld(player.getWorld().getName())
 					&& !player.hasPermission("antibuild.lock.bypass")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getLockedWorldMessage());
+				messageHandler(plugin.getLockedWorldMessage(), player);
 			}
 		}
 	}
@@ -217,7 +217,7 @@ public class AntiBuildEventHandler implements Listener {
 			if (!player.hasPermission("antibuild.bypass")) {
 				if (!player.hasPermission("antibuild.painting")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 			}
 
@@ -226,7 +226,7 @@ public class AntiBuildEventHandler implements Listener {
 				if (plugin.isLockedWorld(player.getWorld().getName())
 						&& !player.hasPermission("antibuild.lock.bypass")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getLockedWorldMessage());
+					messageHandler(plugin.getLockedWorldMessage(), player);
 				}
 			}
 		}
@@ -246,7 +246,7 @@ public class AntiBuildEventHandler implements Listener {
 		if (!player.hasPermission("antibuild.bypass")) {
 			if (!player.hasPermission("antibuild.painting")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getInteractMessage());
+				messageHandler(plugin.getInteractMessage(), player);
 			}
 		}
 
@@ -255,7 +255,7 @@ public class AntiBuildEventHandler implements Listener {
 			if (plugin.isLockedWorld(player.getWorld().getName())
 					&& !player.hasPermission("antibuild.lock.bypass")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getLockedWorldMessage());
+				messageHandler(plugin.getLockedWorldMessage(), player);
 			}
 		}
 	}
@@ -276,7 +276,7 @@ public class AntiBuildEventHandler implements Listener {
 				if (!player.hasPermission("antibuild.bypass")) {
 					if (!player.hasPermission("antibuild.chest")) {
 						event.setCancelled(true);
-						player.sendMessage(plugin.getChestMessage());
+						messageHandler(plugin.getChestMessage(), player);
 					}
 				}
 
@@ -285,7 +285,7 @@ public class AntiBuildEventHandler implements Listener {
 					if (plugin.isLockedWorld(player.getWorld().getName())
 							&& !player.hasPermission("antibuild.lock.bypass")) {
 						event.setCancelled(true);
-						player.sendMessage(plugin.getLockedWorldMessage());
+						messageHandler(plugin.getLockedWorldMessage(), player);
 					}
 				}
 			}
@@ -309,67 +309,67 @@ public class AntiBuildEventHandler implements Listener {
 			case ANVIL:
 				if (!player.hasPermission("antibuild.anvil")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case BEACON:
 				if (!player.hasPermission("antibuild.beacon")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case BREWING:
 				if (!player.hasPermission("antibuild.brewing")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case CHEST:
 				if (!player.hasPermission("antibuild.chest")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case CRAFTING:
 				if (!player.hasPermission("antibuild.crafting")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case DISPENSER:
 				if (!player.hasPermission("antibuild.dispenser")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case ENCHANTING:
 				if (!player.hasPermission("antibuild.enchanting")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case ENDER_CHEST:
 				if (!player.hasPermission("antibuild.enderchest")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case HOPPER:
 				if (!player.hasPermission("antibuild.hopper")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case FURNACE:
 				if (!player.hasPermission("antibuild.furnace")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			case WORKBENCH:
 				if (!player.hasPermission("antibuild.workbench")) {
 					event.setCancelled(true);
-					player.sendMessage(plugin.getInteractMessage());
+					messageHandler(plugin.getInteractMessage(), player);
 				}
 				break;
 			default:
@@ -382,7 +382,7 @@ public class AntiBuildEventHandler implements Listener {
 			if (plugin.isLockedWorld(player.getWorld().getName())
 					&& !player.hasPermission("antibuild.lock.bypass")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getLockedWorldMessage());
+				messageHandler(plugin.getLockedWorldMessage(), player);
 			}
 		}
 	}
@@ -427,7 +427,7 @@ public class AntiBuildEventHandler implements Listener {
 		if (player != null && !player.hasPermission("antibuild.bypass")) {
 			if (!player.hasPermission("antibuild.dropitems")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getDropItemsMessage());
+				messageHandler(plugin.getDropItemsMessage(), player);
 			}
 		}
 
@@ -436,7 +436,7 @@ public class AntiBuildEventHandler implements Listener {
 			if (plugin.isLockedWorld(player.getWorld().getName())
 					&& !player.hasPermission("antibuild.lock.bypass")) {
 				event.setCancelled(true);
-				player.sendMessage(plugin.getLockedWorldMessage());
+				messageHandler(plugin.getLockedWorldMessage(), player);
 			}
 		}
 
@@ -462,7 +462,7 @@ public class AntiBuildEventHandler implements Listener {
 				&& (!player.hasPermission("antibuild.blacklist") || !player
 						.hasPermission("antibuild.blacklist." + blockID))) {
 			event.setCancelled(true);
-			player.sendMessage(plugin.getBlackListMessage());
+			messageHandler(plugin.getBlackListMessage(), player);
 		}
 	}
 
@@ -479,6 +479,23 @@ public class AntiBuildEventHandler implements Listener {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Handler messages that are displayed to players being denied permission
+	 * for a specified action. This allows server admins to use an empty string
+	 * in the config if they wish for no message to be sent.
+	 * 
+	 * @param msg
+	 *            to send to player.
+	 * @param player
+	 *            to send the message to.
+	 */
+	private void messageHandler(String msg, Player player) {
+		if (!msg.isEmpty()) {
+			player.sendMessage(msg);
+		}
+
 	}
 
 }
