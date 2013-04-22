@@ -482,7 +482,7 @@ public class AntiBuildEventHandler implements Listener {
 	}
 
 	/**
-	 * Handler messages that are displayed to players being denied permission
+	 * Handle messages that are displayed to players being denied permission
 	 * for a specified action. This allows server admins to use an empty string
 	 * in the config if they wish for no message to be sent.
 	 * 
