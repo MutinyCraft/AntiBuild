@@ -1,6 +1,6 @@
 name: AntiBuild
 main: com.mutinycraft.jigsaw.AntiBuild.AntiBuild
-version: 2.5
+version: 2.6
 author: Jigsaw
 description: Lightweight plugin for limiting player interaction with blocks.
 website: http://dev.bukkit.org/server-mods/antibuild/
