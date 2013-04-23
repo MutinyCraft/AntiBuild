@@ -7,7 +7,7 @@
 
 Message-Build: '&cYou are not allowed to build!'
 Message-Break: '&cYou are not allowed to break blocks!'
-Message-Bucket: '&cYou are not allowed to use buckets!'
+Message-Bucket: '&cYou are not allowed to use this bucket!'
 Message-Chest: '&cYou are not allowed to access chests!'
 Message-Interact: '&cYou are not allowed to interact with this!'
 Message-Drop-Items: '&cYou are not allowed to drop items!'

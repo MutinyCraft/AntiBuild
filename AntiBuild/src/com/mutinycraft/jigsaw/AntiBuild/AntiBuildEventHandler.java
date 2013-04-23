@@ -155,8 +155,16 @@ public class AntiBuildEventHandler implements Listener {
 		// Bucket check
 		if (!player.hasPermission("antibuild.bypass")) {
 			if (!player.hasPermission("antibuild.bucket")) {
-				event.setCancelled(true);
-				messageHandler(plugin.getBucketMessage(), player);
+				int bucketType = player.getItemInHand().getTypeId();
+				if (bucketType == 326
+						&& !player.hasPermission("antibuild.bucket.water")) {
+					event.setCancelled(true);
+					messageHandler(plugin.getBucketMessage(), player);
+				} else if (bucketType == 327
+						&& !player.hasPermission("antibuild.bucket.lava")) {
+					event.setCancelled(true);
+					messageHandler(plugin.getBucketMessage(), player);
+				}
 			}
 		}
 
@@ -183,8 +191,16 @@ public class AntiBuildEventHandler implements Listener {
 		// Bucket check
 		if (!player.hasPermission("antibuild.bypass")) {
 			if (!player.hasPermission("antibuild.bucket")) {
-				event.setCancelled(true);
-				messageHandler(plugin.getBucketMessage(), player);
+				int source = event.getBlockClicked().getTypeId();
+				if ((source == 8 || source == 9)
+						&& !player.hasPermission("antibuild.bucket.water")) {
+					event.setCancelled(true);
+					messageHandler(plugin.getBucketMessage(), player);
+				} else if ((source == 10 || source == 11)
+						&& !player.hasPermission("antibuild.bucket.lava")) {
+					event.setCancelled(true);
+					messageHandler(plugin.getBucketMessage(), player);
+				}
 			}
 		}
 
@@ -482,9 +498,9 @@ public class AntiBuildEventHandler implements Listener {
 	}
 
 	/**
-	 * Handle messages that are displayed to players being denied permission
-	 * for a specified action. This allows server admins to use an empty string
-	 * in the config if they wish for no message to be sent.
+	 * Handle messages that are displayed to players being denied permission for
+	 * a specified action. This allows server admins to use an empty string in
+	 * the config if they wish for no message to be sent.
 	 * 
 	 * @param msg
 	 *            to send to player.
