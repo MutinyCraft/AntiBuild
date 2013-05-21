@@ -316,7 +316,7 @@ public class AntiBuildEventHandler implements Listener {
         if (event.getPlayer() instanceof Player) {
             player = (Player) event.getPlayer();
         }
-        if (player != null && !player.hasPermission("antibuild.bypass")) {
+        if (player != null && !player.hasPermission("antibuild.bypass") && !player.hasPermission("antibuild.interact")) {
             switch (event.getInventory().getType()) {
                 case ANVIL:
                     if (!player.hasPermission("antibuild.anvil")) {
