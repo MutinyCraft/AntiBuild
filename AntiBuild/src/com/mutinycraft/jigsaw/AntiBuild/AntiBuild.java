@@ -57,7 +57,8 @@ public class AntiBuild extends JavaPlugin implements Listener {
     }
 
     /**
-     * Load config options by getting them from the config.yml.  If the values are not found use the default value provided.
+     * Load config options by getting them from the config.yml.  If the values are not found use the default value
+     * provided.
      */
     private void setConfigOptions() {
         messages.add(0,

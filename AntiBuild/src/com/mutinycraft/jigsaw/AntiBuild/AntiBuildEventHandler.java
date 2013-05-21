@@ -77,7 +77,8 @@ public class AntiBuildEventHandler implements Listener {
         // World lock check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
-                    && !player.hasPermission("antibuild.lock.bypass")) {
+                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+                    "." + player.getWorld().getName())) {
                 event.setCancelled(true);
                 messageHandler(plugin.getLockedWorldMessage(), player);
             }
@@ -131,7 +132,8 @@ public class AntiBuildEventHandler implements Listener {
         // World lock check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
-                    && !player.hasPermission("antibuild.lock.bypass")) {
+                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+                    "." + player.getWorld().getName())) {
                 event.setCancelled(true);
                 messageHandler(plugin.getLockedWorldMessage(), player);
             }
@@ -167,7 +169,8 @@ public class AntiBuildEventHandler implements Listener {
         // World lock check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
-                    && !player.hasPermission("antibuild.lock.bypass")) {
+                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+                    "." + player.getWorld().getName())) {
                 event.setCancelled(true);
                 messageHandler(plugin.getLockedWorldMessage(), player);
             }
@@ -203,7 +206,8 @@ public class AntiBuildEventHandler implements Listener {
         // World lock check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
-                    && !player.hasPermission("antibuild.lock.bypass")) {
+                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+                    "." + player.getWorld().getName())) {
                 event.setCancelled(true);
                 messageHandler(plugin.getLockedWorldMessage(), player);
             }
@@ -236,7 +240,8 @@ public class AntiBuildEventHandler implements Listener {
             // World lock check
             if (!event.isCancelled() && plugin.isUsingLock()) {
                 if (plugin.isLockedWorld(player.getWorld().getName())
-                        && !player.hasPermission("antibuild.lock.bypass")) {
+                        && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock" +
+                        ".bypass." + player.getWorld().getName())) {
                     event.setCancelled(true);
                     messageHandler(plugin.getLockedWorldMessage(), player);
                 }
@@ -265,7 +270,8 @@ public class AntiBuildEventHandler implements Listener {
         // World lock check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
-                    && !player.hasPermission("antibuild.lock.bypass")) {
+                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+                    "." + player.getWorld().getName())) {
                 event.setCancelled(true);
                 messageHandler(plugin.getLockedWorldMessage(), player);
             }
@@ -295,7 +301,8 @@ public class AntiBuildEventHandler implements Listener {
                 // World lock check
                 if (!event.isCancelled() && plugin.isUsingLock()) {
                     if (plugin.isLockedWorld(player.getWorld().getName())
-                            && !player.hasPermission("antibuild.lock.bypass")) {
+                            && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild" +
+                            ".lock.bypass." + player.getWorld().getName())) {
                         event.setCancelled(true);
                         messageHandler(plugin.getLockedWorldMessage(), player);
                     }
@@ -316,7 +323,8 @@ public class AntiBuildEventHandler implements Listener {
         if (event.getPlayer() instanceof Player) {
             player = (Player) event.getPlayer();
         }
-        if (player != null && !player.hasPermission("antibuild.bypass") && !player.hasPermission("antibuild.interact")) {
+        if (player != null && !player.hasPermission("antibuild.bypass") && !player.hasPermission("antibuild" +
+                ".interact")) {
             switch (event.getInventory().getType()) {
                 case ANVIL:
                     if (!player.hasPermission("antibuild.anvil")) {
@@ -392,7 +400,8 @@ public class AntiBuildEventHandler implements Listener {
         // World Check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
-                    && !player.hasPermission("antibuild.lock.bypass")) {
+                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+                    "." + player.getWorld().getName())) {
                 event.setCancelled(true);
                 messageHandler(plugin.getLockedWorldMessage(), player);
             }
@@ -419,7 +428,8 @@ public class AntiBuildEventHandler implements Listener {
         // World Check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
-                    && !player.hasPermission("antibuild.lock.bypass")) {
+                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+                    "." + player.getWorld().getName())) {
                 event.setCancelled(true);
                 // We can't message the player here or it spams.
             }
@@ -446,7 +456,8 @@ public class AntiBuildEventHandler implements Listener {
         // World Check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
-                    && !player.hasPermission("antibuild.lock.bypass")) {
+                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+                    "." + player.getWorld().getName())) {
                 event.setCancelled(true);
                 messageHandler(plugin.getLockedWorldMessage(), player);
             }
