@@ -91,14 +91,14 @@ public class AntiBuildCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("antibuild.lock")) {
             String worldName = getValidWorld(args[1]);
             if (!worldName.isEmpty() && plugin.isLockedWorld(worldName)) {
-                sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.RED
+                sender.sendMessage(ChatColor.GREEN + args[1] + ChatColor.RED
                         + " has already been locked by AntiBuild!");
             } else if (!worldName.isEmpty()) {
                 plugin.addLockedWorld(worldName);
-                sender.sendMessage(ChatColor.YELLOW + worldName + ChatColor.RED
+                sender.sendMessage(ChatColor.GREEN + worldName + ChatColor.RED
                         + " has been locked by AntiBuild!");
             } else {
-                sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.RED
+                sender.sendMessage(ChatColor.GREEN + args[1] + ChatColor.RED
                         + " is not a valid world!");
             }
         } else {
@@ -111,16 +111,16 @@ public class AntiBuildCommandExecutor implements CommandExecutor {
             String worldName = getValidWorld(args[1]);
             if (!worldName.isEmpty()) {
                 if (!plugin.isLockedWorld(worldName)) {
-                    sender.sendMessage(ChatColor.YELLOW + worldName
+                    sender.sendMessage(ChatColor.GREEN + worldName
                             + ChatColor.RED + " is not currently locked!");
                 } else {
                     plugin.removeLockedWorld(worldName);
-                    sender.sendMessage(ChatColor.YELLOW + worldName
+                    sender.sendMessage(ChatColor.GREEN + worldName
                             + ChatColor.RED
                             + " has been unlocked by AntiBuild!");
                 }
             } else {
-                sender.sendMessage(ChatColor.YELLOW + args[1]
+                sender.sendMessage(ChatColor.GREEN + args[1]
                         + " is not a valid world!");
             }
         } else {
@@ -143,7 +143,7 @@ public class AntiBuildCommandExecutor implements CommandExecutor {
 
     private String usageMessage() {
         return (ChatColor.RED + "AntiBuild Command Usage: \n"
-                + ChatColor.YELLOW
+                + ChatColor.GREEN
                 + "/antibuild reload \n/antibuild lock [world] \n"
                 + "/antibuild unlock [world]\n" + "/antibuild list");
     }
@@ -159,7 +159,7 @@ public class AntiBuildCommandExecutor implements CommandExecutor {
             sender.sendMessage(ChatColor.RED
                     + "Current worlds locked by Antibuild:");
             for (String world : worlds) {
-                sender.sendMessage(ChatColor.YELLOW + world);
+                sender.sendMessage(ChatColor.GREEN + world);
             }
         } else {
             sender.sendMessage(ChatColor.RED
