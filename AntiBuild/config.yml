@@ -1,4 +1,4 @@
-# AntiBuild version 2.7
+# AntiBuild version 2.8
 
 # Define your custom message to be displayed when a player tries to interact and is denied permission.
 # Standard CraftBukkit color codes are supported. Use "&" plus the color identifier. Red would be "&c". 
