@@ -1,6 +1,7 @@
 package com.mutinycraft.jigsaw.AntiBuild;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -49,8 +50,9 @@ public class AntiBuildEventHandler implements Listener {
 
             // Block Type Check
             if (plugin.isPerBlockPermission()) {
-                if (player.hasPermission("antibuild.place."
-                        + event.getBlock().getTypeId())) {
+                Block block = event.getBlock();
+                if (player.hasPermission("antibuild.place." + block.getTypeId()) || player.hasPermission("antibuild" +
+                        ".place." + block.getTypeId() + "." + block.getData())) {
                     event.setCancelled(false);
                 }
             }
@@ -104,8 +106,9 @@ public class AntiBuildEventHandler implements Listener {
 
             // Block Type Check
             if (plugin.isPerBlockPermission()) {
-                if (player.hasPermission("antibuild.break."
-                        + event.getBlock().getTypeId())) {
+                Block block = event.getBlock();
+                if (player.hasPermission("antibuild.break." + block.getTypeId()) || player.hasPermission("antibuild" +
+                        ".break." + block.getTypeId() + "." + block.getData())) {
                     event.setCancelled(false);
                 }
             }
