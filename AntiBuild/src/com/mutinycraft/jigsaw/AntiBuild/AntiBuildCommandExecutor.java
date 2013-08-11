@@ -142,10 +142,10 @@ public class AntiBuildCommandExecutor implements CommandExecutor {
     }
 
     private String usageMessage() {
-        return (ChatColor.RED + "AntiBuild Command Usage: \n"
-                + ChatColor.GREEN
-                + "/antibuild reload \n/antibuild lock [world] \n"
-                + "/antibuild unlock [world]\n" + "/antibuild list");
+        return ChatColor.translateAlternateColorCodes('&', "&c---- AntiBuild Command Help ---- \n&a/antibuild reload " +
+                "&b: Reloads the plugin. \n&a/antibuild lock [world] &b: Locks the provided world. \n&a/antibuild " +
+                "unlock [world] &b: Unlocks the provided world.\n&a/antibuild list &b: Shows the currently locked " +
+                "worlds.");
     }
 
     private String noPermsMessage() {
