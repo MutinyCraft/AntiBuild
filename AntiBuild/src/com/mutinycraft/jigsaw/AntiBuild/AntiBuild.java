@@ -27,7 +27,6 @@ public class AntiBuild extends JavaPlugin implements Listener {
     private List<String> lockedWorlds;
     private List<Integer> blacklist;
     private AntiBuildCommandExecutor cmdExecutor;
-    private static final String VERSION = " v2.9";
 
     public void onEnable() {
         log = this.getLogger();
@@ -53,7 +52,7 @@ public class AntiBuild extends JavaPlugin implements Listener {
 
         getCommand("antibuild").setExecutor(cmdExecutor);
 
-        log.info(this.getName() + VERSION + " enabled!");
+        log.info(this.getName() + " enabled!");
     }
 
     /**
@@ -380,6 +379,6 @@ public class AntiBuild extends JavaPlugin implements Listener {
     }
 
     public void onDispable() {
-        log.info(this.getName() + VERSION + " disabled!");
+        log.info(this.getName() + " disabled!");
     }
 }
