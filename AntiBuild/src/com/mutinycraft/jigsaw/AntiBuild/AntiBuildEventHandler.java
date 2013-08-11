@@ -62,20 +62,6 @@ public class AntiBuildEventHandler implements Listener {
             }
         }
 
-        // Blacklist check
-        if (!event.isCancelled() && plugin.isBlacklistOn()) {
-            int id = event.getBlock().getTypeId();
-            if (!player.hasPermission("antibuild.blacklist")
-                    && blockIsBlacklisted(id)) {
-                String perBlockPermission = "antibuild.blacklist."
-                        + String.valueOf(id);
-                if (!player.hasPermission(perBlockPermission)) {
-                    event.setCancelled(true);
-                    messageHandler(plugin.getBlackListMessage(), player);
-                }
-            }
-        }
-
         // World lock check
         if (!event.isCancelled() && plugin.isUsingLock()) {
             if (plugin.isLockedWorld(player.getWorld().getName())
@@ -483,12 +469,12 @@ public class AntiBuildEventHandler implements Listener {
         Player player = event.getPlayer();
         int blockID = event.getPlayer().getItemInHand().getTypeId();
 
-        if (plugin.isBlacklistOn()
-                && blockIsBlacklisted(blockID)
-                && (!player.hasPermission("antibuild.blacklist") || !player
-                .hasPermission("antibuild.blacklist." + blockID))) {
-            event.setCancelled(true);
-            messageHandler(plugin.getBlackListMessage(), player);
+        if (plugin.isBlacklistOn() && blockIsBlacklisted(blockID)) {
+            if (!player.hasPermission("antibuild.blacklist") && !player.hasPermission("antibuild.blacklist." +
+                    blockID)) {
+                event.setCancelled(true);
+                messageHandler(plugin.getBlackListMessage(), player);
+            }
         }
     }
 
