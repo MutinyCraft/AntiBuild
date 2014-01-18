@@ -49,7 +49,7 @@ public class AntiBuild extends JavaPlugin {
 
         /* Register listeners */
         logger.info("Registering listeners...");
-        getServer().getPluginManager().registerEvents(new BlockBreakEvent(this), this);
+        getServer().getPluginManager().registerEvents(new BlockBreak(this), this);
         getServer().getPluginManager().registerEvents(new BlockPlace(this), this);
         getServer().getPluginManager().registerEvents(new BucketEmpty(this), this);
         getServer().getPluginManager().registerEvents(new BucketFill(this), this);
