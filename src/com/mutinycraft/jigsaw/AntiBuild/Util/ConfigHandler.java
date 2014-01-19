@@ -110,7 +110,7 @@ public class ConfigHandler {
      *
      * @return message to display to player.
      */
-    public String gtNoDropItemsMessage() {
+    public String getNoDropItemsMessage() {
         return ChatColor.translateAlternateColorCodes('&', (plugin.getConfig().getString("Message-Drop-Items",
                 "&cYou are not allowed to drop items!")));
     }
