@@ -1,7 +1,11 @@
 package com.mutinycraft.jigsaw.AntiBuild.Listeners;
 
 import com.mutinycraft.jigsaw.AntiBuild.AntiBuild;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
 /**
  * Author: Jigsaw
@@ -32,5 +36,33 @@ public class ItemPickup implements Listener {
 
     public ItemPickup(AntiBuild p) {
         plugin = p;
+    }
+
+    /**
+     * Checks if player has proper permission to pickup items.
+     *
+     * @param event that triggers listener.
+     */
+    @EventHandler(priority = EventPriority.LOW)
+    private void PickupItem(PlayerPickupItemEvent event) {
+        Player player = event.getPlayer();
+
+        // Pickup item check.
+        if (player != null && !player.hasPermission("antibuild.bypass")) {
+            if (!player.hasPermission("antibuild.pickupitems")) {
+                event.setCancelled(true);
+                // We can't message the player here or it spams.
+            }
+        }
+
+//        // World Check
+//        if (!event.isCancelled() && plugin.isUsingLock()) {
+//            if (plugin.isLockedWorld(player.getWorld().getName())
+//                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+//                    "." + player.getWorld().getName())) {
+//                event.setCancelled(true);
+//                // We can't message the player here or it spams.
+//            }
+//        }
     }
 }
