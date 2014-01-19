@@ -1,7 +1,12 @@
 package com.mutinycraft.jigsaw.AntiBuild.Listeners;
 
 import com.mutinycraft.jigsaw.AntiBuild.AntiBuild;
+import com.mutinycraft.jigsaw.AntiBuild.Util.PlayerMessenger;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.hanging.HangingPlaceEvent;
 
 /**
  * Author: Jigsaw
@@ -32,5 +37,34 @@ public class HangingPlace implements Listener {
 
     public HangingPlace(AntiBuild p) {
         plugin = p;
+    }
+
+    /**
+     * Checks if a player has permission to hang paintings or item frames.
+     *
+     * @param event that triggers listener.
+     */
+    @EventHandler(priority = EventPriority.LOW)
+    public void NoHangingPlace(HangingPlaceEvent event) {
+
+        Player player = event.getPlayer();
+
+        // Hanging place
+        if (!player.hasPermission("antibuild.bypass")) {
+            if (!player.hasPermission("antibuild.painting")) {
+                event.setCancelled(true);
+                PlayerMessenger.messageHandler(plugin.getConfigHandler().getNoInteractMessage(), player);
+            }
+        }
+
+//        // World lock check
+//        if (!event.isCancelled() && plugin.isUsingLock()) {
+//            if (plugin.isLockedWorld(player.getWorld().getName())
+//                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+//                    "." + player.getWorld().getName())) {
+//                event.setCancelled(true);
+//                messageHandler(plugin.getLockedWorldMessage(), player);
+//            }
+//        }
     }
 }
