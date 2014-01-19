@@ -44,7 +44,7 @@ public class BlockBreak implements Listener {
     /**
      * Checks if a player has permission to break blocks.
      *
-     * @param event
+     * @param event that triggered listener.
      */
     @EventHandler(priority = EventPriority.LOW)
     public void NoBreak(BlockBreakEvent event) {
