@@ -1,7 +1,14 @@
 package com.mutinycraft.jigsaw.AntiBuild.Listeners;
 
 import com.mutinycraft.jigsaw.AntiBuild.AntiBuild;
+import com.mutinycraft.jigsaw.AntiBuild.Util.PlayerMessenger;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 /**
  * Author: Jigsaw
@@ -32,5 +39,38 @@ public class ChestAccess implements Listener {
 
     public ChestAccess(AntiBuild p) {
         plugin = p;
+    }
+
+    /**
+     * Checks if a player has permission to open/accesss chests.
+     *
+     * @param event that triggered listener.
+     */
+    @EventHandler(priority = EventPriority.LOW)
+    public void NoChestAccess(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+                && event.getClickedBlock().getType() == Material.CHEST) {
+            if (event.getPlayer() instanceof Player) {
+
+                Player player = (Player) event.getPlayer();
+
+                if (!player.hasPermission("antibuild.bypass")) {
+                    if (!player.hasPermission("antibuild.chest")) {
+                        event.setCancelled(true);
+                        PlayerMessenger.messageHandler(plugin.getConfigHandler().getNoChestAccessMessage(), player);
+                    }
+                }
+
+//                // World lock check
+//                if (!event.isCancelled() && plugin.isUsingLock()) {
+//                    if (plugin.isLockedWorld(player.getWorld().getName())
+//                            && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild" +
+//                            ".lock.bypass." + player.getWorld().getName())) {
+//                        event.setCancelled(true);
+//                        messageHandler(plugin.getLockedWorldMessage(), player);
+//                    }
+//                }
+            }
+        }
     }
 }
