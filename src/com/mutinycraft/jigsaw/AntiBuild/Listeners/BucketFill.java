@@ -1,7 +1,12 @@
 package com.mutinycraft.jigsaw.AntiBuild.Listeners;
 
 import com.mutinycraft.jigsaw.AntiBuild.AntiBuild;
+import com.mutinycraft.jigsaw.AntiBuild.Util.PlayerMessenger;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerBucketFillEvent;
 
 /**
  * Author: Jigsaw
@@ -32,5 +37,42 @@ public class BucketFill implements Listener {
 
     public BucketFill(AntiBuild p) {
         plugin = p;
+    }
+
+    /**
+     * Checks if a player has permission to fill a bucket.
+     *
+     * @param event that triggered the listener.
+     */
+    @EventHandler(priority = EventPriority.LOW)
+    public void NoBucketFill(PlayerBucketFillEvent event) {
+
+        Player player = event.getPlayer();
+
+        // Bucket check
+        if (!player.hasPermission("antibuild.bypass")) {
+            if (!player.hasPermission("antibuild.bucket")) {
+                int source = event.getBlockClicked().getTypeId();
+                if ((source == 8 || source == 9)
+                        && !player.hasPermission("antibuild.bucket.water")) {
+                    event.setCancelled(true);
+                    PlayerMessenger.messageHandler(plugin.getConfigHandler().getNoBucketMessage(), player);
+                } else if ((source == 10 || source == 11)
+                        && !player.hasPermission("antibuild.bucket.lava")) {
+                    event.setCancelled(true);
+                    PlayerMessenger.messageHandler(plugin.getConfigHandler().getNoBucketMessage(), player);
+                }
+            }
+        }
+
+//        // World lock check
+//        if (!event.isCancelled() && plugin.isUsingLock()) {
+//            if (plugin.isLockedWorld(player.getWorld().getName())
+//                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+//                    "." + player.getWorld().getName())) {
+//                event.setCancelled(true);
+//                messageHandler(plugin.getLockedWorldMessage(), player);
+//            }
+//        }
     }
 }
