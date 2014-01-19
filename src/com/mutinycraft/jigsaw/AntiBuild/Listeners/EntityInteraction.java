@@ -1,7 +1,13 @@
 package com.mutinycraft.jigsaw.AntiBuild.Listeners;
 
 import com.mutinycraft.jigsaw.AntiBuild.AntiBuild;
+import com.mutinycraft.jigsaw.AntiBuild.Util.BlacklistChecker;
+import com.mutinycraft.jigsaw.AntiBuild.Util.PlayerMessenger;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 /**
  * Author: Jigsaw
@@ -32,5 +38,29 @@ public class EntityInteraction implements Listener {
 
     public EntityInteraction(AntiBuild p) {
         plugin = p;
+    }
+
+    /**
+     * Special check to see if an Entity (boat/minecart) is blacklisted since
+     * the normal blacklist will not check entities.
+     *
+     * @param event that triggers listener.
+     */
+    @EventHandler(priority = EventPriority.LOW)
+    private void EntityBlacklistCheck(PlayerInteractEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        int blockID = event.getPlayer().getItemInHand().getTypeId();
+
+        if (plugin.getConfigHandler().isBlackListEnabled() && BlacklistChecker.isBlockBlackListed(plugin, blockID)) {
+            if (!player.hasPermission("antibuild.blacklist") && !player.hasPermission("antibuild.blacklist." +
+                    blockID)) {
+                event.setCancelled(true);
+                PlayerMessenger.messageHandler(plugin.getConfigHandler().getBlacklistMessage(), player);
+            }
+        }
     }
 }
