@@ -107,9 +107,9 @@ public class AntiBuildEventHandler implements Listener {
         // Blacklist check
         if (!event.isCancelled() && plugin.isBlacklistOn()) {
             int id = event.getBlock().getTypeId();
-            if (!player.hasPermission("antibuild.blacklist")
-                    && blockIsBlacklisted(id)) {
-                String perBlockPermission = "antibuild.blacklist."
+            if (!player.hasPermission("antibuild.blacklist.break")
+                    && blockIsBlacklistedBreak(id)) {
+                String perBlockPermission = "antibuild.blacklist.break."
                         + String.valueOf(id);
                 if (!player.hasPermission(perBlockPermission)) {
                     event.setCancelled(true);
@@ -469,8 +469,8 @@ public class AntiBuildEventHandler implements Listener {
         Player player = event.getPlayer();
         int blockID = event.getPlayer().getItemInHand().getTypeId();
 
-        if (plugin.isBlacklistOn() && blockIsBlacklisted(blockID)) {
-            if (!player.hasPermission("antibuild.blacklist") && !player.hasPermission("antibuild.blacklist." +
+        if (plugin.isBlacklistOn() && blockIsBlacklistedPlace(blockID)) {
+            if (!player.hasPermission("antibuild.blacklist.place") && !player.hasPermission("antibuild.blacklist.place." +
                     blockID)) {
                 event.setCancelled(true);
                 messageHandler(plugin.getBlackListMessage(), player);
@@ -480,13 +480,27 @@ public class AntiBuildEventHandler implements Listener {
 
     /**
      * Checks the provided block to see if it is contained in the
-     * Blacklisted-Blocks section of the config.yml.
+     * Blacklisted-Blocks-Place section of the config.yml.
      *
      * @param id of block to check.
      * @return true if block is blacklisted or false otherwise.
      */
-    private boolean blockIsBlacklisted(int id) {
-        if (plugin.getBlacklist().contains(id)) {
+    private boolean blockIsBlacklistedPlace(int id) {
+        if (plugin.getBlacklistPlace().contains(id)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks the provided block to see if it is contained in the
+     * Blacklisted-Blocks-Break section of the config.yml.
+     *
+     * @param id of block to check.
+     * @return true if block is blacklisted or false otherwise.
+     */
+    private boolean blockIsBlacklistedBreak(int id) {
+        if (plugin.getBlacklistBreak().contains(id)) {
             return true;
         }
         return false;

@@ -1,4 +1,4 @@
-# AntiBuild version 2.8
+# AntiBuild version 2.9.2
 
 # Define your custom message to be displayed when a player tries to interact and is denied permission.
 # Standard CraftBukkit color codes are supported. Use "&" plus the color identifier. Red would be "&c". 
@@ -11,7 +11,7 @@ Message-Bucket: '&cYou are not allowed to use this bucket!'
 Message-Chest: '&cYou are not allowed to access chests!'
 Message-Interact: '&cYou are not allowed to interact with this!'
 Message-Drop-Items: '&cYou are not allowed to drop items!'
-Message-Blacklist: '&cYou may not place or break this type of block!'
+Message-Blacklist: '&cYou are not allowed to perform that action with this block!'
 Message-Locked-World: '&cThis world is currently locked and cannot be built in.'
 
 # Per block break/place permissions.  Set to true to enable.
@@ -26,5 +26,7 @@ Per-Block-Permission: false
 # Currently only supports item IDs.  This is done for the gain of a faster check against the blacklist.
 
 Blacklist-On: false
-Blacklisted-Blocks:
+Blacklisted-Blocks-Place:
+  - 7
+Blacklisted-Blocks-Break:
   - 7

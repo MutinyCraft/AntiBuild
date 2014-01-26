@@ -25,7 +25,8 @@ public class AntiBuild extends JavaPlugin implements Listener {
     private boolean perBlockPermission;
     private List<String> messages;
     private List<String> lockedWorlds;
-    private List<Integer> blacklist;
+    private List<Integer> blacklistPlace;
+    private List<Integer> blacklistBreak;
     private AntiBuildCommandExecutor cmdExecutor;
 
     public void onEnable() {
@@ -88,7 +89,8 @@ public class AntiBuild extends JavaPlugin implements Listener {
                         (config.getString("Message-Locked-World",
                                 "&cThis world is currently locked and cannot be built in."))));
         blacklistOn = config.getBoolean("Blacklist-On", false);
-        blacklist = config.getIntegerList("Blacklisted-Blocks");
+        blacklistPlace = config.getIntegerList("Blacklisted-Blocks-Place");
+        blacklistBreak = config.getIntegerList("Blacklisted-Blocks-Break");
         perBlockPermission = config.getBoolean("Per-Block-Permission", false);
     }
 
@@ -272,12 +274,21 @@ public class AntiBuild extends JavaPlugin implements Listener {
     }
 
     /**
-     * Returns a list of all blacklisted block IDs.
+     * Returns a list of all blacklisted block IDs for placing.
      *
      * @return list of blacklisted blocks.
      */
-    public List<Integer> getBlacklist() {
-        return blacklist;
+    public List<Integer> getBlacklistPlace() {
+        return blacklistPlace;
+    }
+
+    /**
+     * Returns a list of all blacklisted block IDs for breaking.
+     *
+     * @return list of blacklisted blocks.
+     */
+    public List<Integer> getBlacklistBreak() {
+        return blacklistBreak;
     }
 
     /**
