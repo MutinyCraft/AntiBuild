@@ -24,4 +24,8 @@ package com.mutinycraft.jigsaw.AntiBuild.Commands;
  */
 
 public class List {
+
+    public boolean execute(){
+        return true;
+    }
 }

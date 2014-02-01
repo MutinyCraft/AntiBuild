@@ -24,4 +24,7 @@ package com.mutinycraft.jigsaw.AntiBuild.Commands;
  */
 
 public class Lock {
+    public boolean execute(){
+        return true;
+    }
 }
