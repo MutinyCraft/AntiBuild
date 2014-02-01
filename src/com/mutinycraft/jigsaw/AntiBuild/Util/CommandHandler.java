@@ -32,7 +32,7 @@ import org.bukkit.command.CommandSender;
  * along with AntiBuild.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class CommandHandler implements CommandExecutor{
+public class CommandHandler implements CommandExecutor {
 
     private AntiBuild plugin;
     private Lock lockCommand;
@@ -40,7 +40,7 @@ public class CommandHandler implements CommandExecutor{
     private Reload reloadCommand;
     private Unlock unlockCommand;
 
-    public CommandHandler(AntiBuild p){
+    public CommandHandler(AntiBuild p) {
         plugin = p;
         lockCommand = new Lock();
         listCommand = new List();
@@ -50,9 +50,9 @@ public class CommandHandler implements CommandExecutor{
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("antibuild") && args.length > 1){
+        if (cmd.getName().equalsIgnoreCase("antibuild") && args.length > 1) {
             String command = args[0].toLowerCase();
-            switch (command){
+            switch (command) {
                 case "reload":
                     reloadCommand.execute();
                     break;

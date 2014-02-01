@@ -7,7 +7,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * Author: Jigsaw
@@ -38,13 +37,13 @@ public class WorldHandler {
     private File worldDataFile;
     private AntiBuild plugin;
 
-    public WorldHandler(AntiBuild p){
+    public WorldHandler(AntiBuild p) {
         plugin = p;
         reloadWorldData();
     }
 
     /**
-     *  Loads the locked worlds file from disk.
+     * Loads the locked worlds file from disk.
      */
     private void reloadWorldData() {
         if (worldDataFile == null) {
@@ -61,6 +60,7 @@ public class WorldHandler {
 
     /**
      * Provides access to the locked worlds configuration file.
+     *
      * @return FileConfiguration representation of the locked worlds.
      */
     public FileConfiguration getCustomConfig() {
@@ -80,25 +80,27 @@ public class WorldHandler {
         try {
             getCustomConfig().save(worldDataFile);
         } catch (IOException ex) {
-            plugin.getLogger().info( "Could not save data to " + worldDataFile);
+            plugin.getLogger().info("Could not save data to " + worldDataFile);
         }
     }
 
     /**
      * Check to see if a world is currently locked.
+     *
      * @param worldName to check lock status of.
      * @return true if locked, false otherwise.
      */
-    public boolean isLockedWorld(String worldName){
+    public boolean isLockedWorld(String worldName) {
         return worldData.getStringList("Locked-Worlds").contains(worldName);
     }
 
     /**
      * Adds a locked world to the locked world data and saves it to disk.
+     *
      * @param worldName to add to the locked world list.
      */
-    public void addLockedWorld(String worldName){
-        if(!isLockedWorld(worldName)){
+    public void addLockedWorld(String worldName) {
+        if (!isLockedWorld(worldName)) {
             worldData.getStringList("Locked-Worlds").add(worldName);
             saveWorldData();
         }
@@ -106,10 +108,11 @@ public class WorldHandler {
 
     /**
      * Removes a locked world from the locked world data and saves it to disk.
+     *
      * @param worldName to remove from teh locked world list.
      */
-    public void removeLockedWorld(String worldName){
-        if(isLockedWorld(worldName)){
+    public void removeLockedWorld(String worldName) {
+        if (isLockedWorld(worldName)) {
             worldData.getStringList("Locked-Worlds").remove(worldName);
             saveWorldData();
         }

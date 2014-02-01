@@ -68,7 +68,8 @@ public class BucketFill implements Listener {
 //        // World lock check
 //        if (!event.isCancelled() && plugin.isUsingLock()) {
 //            if (plugin.isLockedWorld(player.getWorld().getName())
-//                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+//                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock
+// .bypass" +
 //                    "." + player.getWorld().getName())) {
 //                event.setCancelled(true);
 //                messageHandler(plugin.getLockedWorldMessage(), player);

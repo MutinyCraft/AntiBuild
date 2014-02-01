@@ -1,5 +1,7 @@
 package com.mutinycraft.jigsaw.AntiBuild.Commands;
 
+import com.mutinycraft.jigsaw.AntiBuild.AntiBuild;
+
 /**
  * Author: Jigsaw
  * *
@@ -24,7 +26,14 @@ package com.mutinycraft.jigsaw.AntiBuild.Commands;
  */
 
 public class Unlock {
-    public boolean execute(){
+
+    private AntiBuild plugin;
+
+    public Unlock(AntiBuild p) {
+        plugin = p;
+    }
+
+    public boolean execute() {
         return true;
     }
 }

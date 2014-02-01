@@ -2,6 +2,7 @@ package com.mutinycraft.jigsaw.AntiBuild;
 
 import com.mutinycraft.jigsaw.AntiBuild.Listeners.*;
 import com.mutinycraft.jigsaw.AntiBuild.Util.ConfigHandler;
+import com.mutinycraft.jigsaw.AntiBuild.Util.WorldHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -33,9 +34,10 @@ public class AntiBuild extends JavaPlugin {
 
     private Logger logger;
     private ConfigHandler configHandler;
+    private WorldHandler worldHandler;
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
         logger = this.getLogger();
 
         /* Load the config.yml from disk */
@@ -44,6 +46,9 @@ public class AntiBuild extends JavaPlugin {
         logger.info("Successfully loaded config.yml");
 
         /* Load the world.yml from disk */
+        logger.info("Loading the locked world from disk...");
+        worldHandler = new WorldHandler(this);
+        logger.info("Successfully loaded locked worlds.");
 
         /* Register commands */
 
@@ -64,8 +69,12 @@ public class AntiBuild extends JavaPlugin {
 
     }
 
-    public ConfigHandler getConfigHandler(){
+    public ConfigHandler getConfigHandler() {
         return configHandler;
+    }
+
+    public WorldHandler getWorldHandler() {
+        return worldHandler;
     }
 
 }

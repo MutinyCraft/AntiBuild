@@ -58,7 +58,8 @@ public class ItemPickup implements Listener {
 //        // World Check
 //        if (!event.isCancelled() && plugin.isUsingLock()) {
 //            if (plugin.isLockedWorld(player.getWorld().getName())
-//                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock.bypass" +
+//                    && !player.hasPermission("antibuild.lock.bypass") && !player.hasPermission("antibuild.lock
+// .bypass" +
 //                    "." + player.getWorld().getName())) {
 //                event.setCancelled(true);
 //                // We can't message the player here or it spams.

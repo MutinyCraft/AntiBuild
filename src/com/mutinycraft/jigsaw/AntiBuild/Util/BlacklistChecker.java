@@ -29,11 +29,12 @@ public class BlacklistChecker {
 
     /**
      * Static method which will check to see if the provided block is currently blacklisted.
+     *
      * @param plugin which is accessing the method.
-     * @param id of block to check for in blacklist.
+     * @param id     of block to check for in blacklist.
      * @return true if block is blacklisted, false otherwise.
      */
-    public static boolean isBlockBlackListed(AntiBuild plugin, int id){
+    public static boolean isBlockBlackListed(AntiBuild plugin, int id) {
         return plugin.getConfigHandler().getBlackListedBlocks().contains(id);
     }
 }
