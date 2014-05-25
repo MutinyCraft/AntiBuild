@@ -1,10 +1,7 @@
 package com.mutinycraft.jigsaw.AntiBuild.Util;
 
 import com.mutinycraft.jigsaw.AntiBuild.AntiBuild;
-import com.mutinycraft.jigsaw.AntiBuild.Commands.List;
-import com.mutinycraft.jigsaw.AntiBuild.Commands.Lock;
-import com.mutinycraft.jigsaw.AntiBuild.Commands.Reload;
-import com.mutinycraft.jigsaw.AntiBuild.Commands.Unlock;
+import com.mutinycraft.jigsaw.AntiBuild.Commands.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,13 +36,15 @@ public class CommandHandler implements CommandExecutor {
     private List listCommand;
     private Reload reloadCommand;
     private Unlock unlockCommand;
+    private Help helpCommand;
 
     public CommandHandler(AntiBuild p) {
         plugin = p;
-        lockCommand = new Lock();
-        listCommand = new List();
-        reloadCommand = new Reload();
-        unlockCommand = new Unlock();
+        lockCommand = new Lock(p);
+        listCommand = new List(p);
+        reloadCommand = new Reload(p);
+        unlockCommand = new Unlock(p);
+        helpCommand = new Help(p);
     }
 
     @Override
@@ -66,6 +65,7 @@ public class CommandHandler implements CommandExecutor {
                     unlockCommand.execute();
                     break;
                 default:
+                    helpCommand.execute(sender);
                     break;
             }
         }
